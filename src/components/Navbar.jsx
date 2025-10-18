@@ -42,14 +42,14 @@ export default function Navbar() {
             Results
           </Link>
           <Link
-            to="/"
+            to="/questionnaire"
             className={`font-medium ${
-              location.pathname === "/"
+              location.pathname === "/questionnaire"
                 ? "text-white border-b-2 border-[#80c684]"
                 : "text-gray-600 hover:text-blue-500"
             }`}
           >
-            Questioner
+            Questionaire
           </Link>
         </div>
       </div>
