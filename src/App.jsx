@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
+import Questionnaire from "./pages/Questionnaire.jsx";
 
 export default function App() {
   return (
