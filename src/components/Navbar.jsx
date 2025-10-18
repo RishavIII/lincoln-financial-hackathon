@@ -1,5 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import NavbarLink from "./NavbarLink";
 
 export default function Navbar() {
   const location = useLocation();
@@ -21,36 +22,18 @@ export default function Navbar() {
         <h1 className="text-xl font-bold text-[#4cae4f]">InsoraPath</h1>
 
         <div className="flex gap-6">
-          <Link
-            to="/"
-            className={`font-medium ${
-              location.pathname === "/"
-                ? "text-white border-b-2 border-[#80c684]"
-                : "text-gray-600 hover:text-blue-500"
-            }`}
-          >
-            Dashboard
-          </Link>
-          <Link
-            to="/"
-            className={`font-medium ${
-              location.pathname === "/"
-                ? "text-white border-b-2 border-[#80c684]"
-                : "text-gray-600 hover:text-blue-500"
-            }`}
-          >
-            Results
-          </Link>
-          <Link
-            to="/"
-            className={`font-medium ${
-              location.pathname === "/"
-                ? "text-white border-b-2 border-[#80c684]"
-                : "text-gray-600 hover:text-blue-500"
-            }`}
-          >
-            Questioner
-          </Link>
+          <NavbarLink
+            url="/"
+            name="Dashboard"
+          ></NavbarLink>
+          <NavbarLink
+            url="/results"
+            name="Results"
+          ></NavbarLink>
+          <NavbarLink
+            url="/questionnaire"
+            name="Questionnaire"
+          ></NavbarLink>
         </div>
       </div>
     </nav>
