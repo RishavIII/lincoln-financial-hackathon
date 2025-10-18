@@ -1,41 +1,63 @@
+import { useState } from "react";
+import Question from "../components/Question";
+import { questions } from "../data/questions";
+
 export default function Questionnaire() {
-<<<<<<< HEAD
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
+
+  const currentQuestion = questions[currentIndex];
+
+  const handleAnswer = (value) => {
+    setAnswers({ ...answers, [currentQuestion.id]: value });
+  };
+
+  const handleNext = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      console.log("Final answers:", JSON.stringify(answers, null, 2));
+    }
+  };
+
+  const handleBack = () => {
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+  };
+
   return (
-    <div className="p-8">
-        <div className="p-12 bg-red-500">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-4 ">
+    <div className="min-h-screen bg-gray-50 p-8">
+      <div className="max-w-2xl mx-auto">
+        <div className="p-12 bg-blue-500 rounded-xl mb-8">
+          <h2 className="text-5xl font-semibold text-white mb-4 text-center">
             Questionnaire
           </h2>
-          <p className="text-gray-600">
-            Welcome to your dashboard! You can start building your components and
-            visualizations here.
+          <p className="text-white text-center">
+            Question {currentIndex + 1} of {questions.length}
           </p>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="p-6 bg-white rounded-xl shadow hover:shadow-md transition">
-              <h3 className="font-semibold text-lg mb-2">Card 1</h3>
-              <p className="text-gray-500">Some quick data or summary text.</p>
-            </div>
-            
-            <Question 
-              type="radio"/> 
-          </div>
         </div>
+
+        <Question 
+          {...currentQuestion}
+          value={answers[currentQuestion.id] || ""}
+          onChange={handleAnswer}
+        /> 
+
+        <div className="flex gap-4 mt-6">
+          <button 
+            onClick={handleBack}
+            disabled={currentIndex === 0}
+            className="px-6 py-2 bg-gray-300 rounded disabled:opacity-50"
+          >
+            Back
+          </button>
+          <button 
+            onClick={handleNext}
+            className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            {currentIndex === questions.length - 1 ? "Submit" : "Next"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
-=======
-    return (
-        <div className="p-8">
-            <div className="p-12">
-              <h2 className="text-3xl font-semibold text-gray-800 mb-4 ">
-                Questionnaire
-              </h2>
-              <p className="text-gray-600">
-                Welcome to the questionnaire!
-              </p>
-            </div>
-        </div>
-    )
-}
->>>>>>> c3e8e5a42667b71dac0fed5c03f495942f0389be
