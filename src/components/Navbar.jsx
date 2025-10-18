@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link
             to="/results"
             className={`font-medium ${
-              location.pathname === "/"
+              location.pathname === "/results"
                 ? "text-blue-600 border-b-2 border-blue-600"
                 : "text-gray-600 hover:text-blue-500"
             }`}
