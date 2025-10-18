@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
+import Results from "./pages/Results"
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
         <main className="min-h-screen min-w-screen bg-linear-to-r from-cyan-500 to-blue-500 ">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/results" element={<Results />} />
           </Routes>
         </main>
       </div>

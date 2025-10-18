@@ -19,6 +19,17 @@ export default function Navbar() {
           >
             Dashboard
           </Link>
+
+          <Link
+            to="/results"
+            className={`font-medium ${
+              location.pathname === "/"
+                ? "text-blue-600 border-b-2 border-blue-600"
+                : "text-gray-600 hover:text-blue-500"
+            }`}
+          >
+            Results
+          </Link>
         </div>
       </div>
     </nav>

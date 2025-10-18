@@ -1,3 +1,5 @@
+import Card from "../components/Card"
+
 export default function Dashboard() {
   return (
     <div className="p-8">
@@ -11,14 +13,14 @@ export default function Dashboard() {
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="p-6 bg-white rounded-xl shadow hover:shadow-md transition">
-              <h3 className="font-semibold text-lg mb-2">Card 1</h3>
-              <p className="text-gray-500">Some quick data or summary text.</p>
-            </div>
-            <div className="p-6 bg-white rounded-xl shadow hover:shadow-md transition">
-              <h3 className="font-semibold text-lg mb-2">Card 2</h3>
-              <p className="text-gray-500">Another summary or widget area.</p>
-            </div>
+            <Card 
+              title="Card 1"
+              description="This is a summary or widget area."
+            />
+            <Card 
+              title="Card 2"
+              description="Another summary or widget area."
+            />
           </div>
         </div>
     </div>
