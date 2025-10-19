@@ -43,7 +43,7 @@ public class BedrockController {
 				.region(Region.US_EAST_1).build();
 
 		// Set the model ID to Amazon Titan Text Express.
-		var modelId = "amazon.nova-premier-v1:0";
+		var modelId = "us.anthropic.claude-3-7-sonnet-20250219-v1:0";
 
 		JSONArray health = new JSONArray();
 
@@ -55,33 +55,35 @@ public class BedrockController {
 		json.put("smoke", false);
 		json.put("alcohol", false);
 
-		String formattedString = String.format("Give me a event that happen on");
+		String formattedString = String.format("Give me a event that happen on %s",input.getString("date"));
 
 		// Create the input text and embed it in a message object with the user role.
 		var inputText = formattedString;
 		var message = Message.builder().content(ContentBlock.fromText(inputText)).role(ConversationRole.USER).build();
 
+		// StringBuilder to capture the complete response
+		StringBuilder llmResponse = new StringBuilder();
+
 		// Create a handler to extract and print the response text in real-time.
 		var responseStreamHandler = ConverseStreamResponseHandler.builder()
 				.subscriber(ConverseStreamResponseHandler.Visitor.builder().onContentBlockDelta(chunk -> {
 					String responseText = chunk.delta().text();
+					llmResponse.append(responseText);
 					System.out.print(responseText);
 				}).build()).onError(err -> System.err.printf("Can't invoke '%s': %s", modelId, err.getMessage()))
 				.build();
-		/*	
 		try {
-			System.out.println("Hello");
 			// Send the message with a basic inference configuration and attach the handler.
-			//client.converseStream(
-					//request -> request.modelId(modelId).messages(message)
-							//.inferenceConfig(config -> config.maxTokens(1000).temperature(0.5F).topP(0.9F)),
-					//responseStreamHandler).get();
+			client.converseStream(
+					request -> request.modelId(modelId).messages(message)
+							.inferenceConfig(config -> config.maxTokens(1000).temperature(0.5F).topP(0.9F)),
+					responseStreamHandler).get();
 
 		} catch (ExecutionException | InterruptedException e) {
 			System.err.printf("Can't invoke '%s': %s", modelId, e.getCause().getMessage());
 		}
-		*/
-		return new ResponseEntity<>(input.toString(), HttpStatus.OK);
+		
+		return new ResponseEntity<>(llmResponse.toString(), HttpStatus.OK);
 	}
 
 	@GetMapping("/init")
