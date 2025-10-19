@@ -18,7 +18,7 @@ export default function Questionnaire() {
     } else {
       // send to back end
       console.log(JSON.stringify(answers));
-      await fetch('/api/submit',{
+      await fetch('http://localhost:8080/process',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export default function Questionnaire() {
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-2xl mx-auto">
-        <div className="p-12 bg-blue-500 rounded-xl mb-8">
+        <div className="p-12 bg-[#4cae4f] rounded-xl mb-8">
           <h2 className="text-5xl font-semibold text-white mb-4 text-center">
             Questionnaire
           </h2>
@@ -60,7 +60,7 @@ export default function Questionnaire() {
           </button>
           <button 
             onClick={handleNext}
-            className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-6 py-2 bg-[#4cae4f] text-white rounded hover:bg-[#80c684]"
           >
             {currentIndex === questions.length - 1 ? "Submit" : "Next"}
           </button>

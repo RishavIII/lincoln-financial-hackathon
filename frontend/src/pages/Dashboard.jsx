@@ -1,5 +1,3 @@
-import Card from "../components/Card"
-
 export default function Dashboard() {
   return (
     <div className="p-8 min-h-screen relative overflow-hidden">

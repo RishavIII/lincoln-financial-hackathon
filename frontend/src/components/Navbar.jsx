@@ -35,6 +35,10 @@ export default function Navbar() {
             url="/questionnaire"
             name="Questionnaire"
           ></NavbarLink>
+          <NavbarLink
+            url="/wellness"
+            name="Wellness"
+          ></NavbarLink>
         </div>
       </div>
     </nav>
