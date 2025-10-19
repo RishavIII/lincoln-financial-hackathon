@@ -41,15 +41,23 @@ export default function Questionnaire() {
       localStorage.setItem('questionnaireCompleted', 'true');
       
       try {
-        await fetch('http://localhost:8080/process', {
+        const response = await fetch('http://localhost:8080/process', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(answers)
         });
+        
+        if (response.ok) {
+          const recommendations = await response.json();
+          localStorage.setItem('recommendations', JSON.stringify(recommendations));
+        } else {
+          throw new Error('Backend response not ok');
+        }
       } catch (error) {
-        console.log('Backend not available, proceeding to results');
+        console.log('Backend not available, using demo data');
+        localStorage.setItem('backendError', 'Backend failed to fetch');
       }
       
       // Navigate to results page

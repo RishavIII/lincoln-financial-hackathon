@@ -52,6 +52,53 @@ export default function CompoundInterestPage() {
           background-size: 400% 400%;
           animation: gradient-bg 15s ease infinite;
         }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .fade-in-up {
+          animation: fadeInUp 1s ease-out forwards;
+        }
+
+        @keyframes gradient-border-animation {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .animated-border {
+          position: relative;
+          background: linear-gradient(135deg, #3b82f6, #06b6d4, #10b981, #34d399, #6ee7b7, #3b82f6);
+          background-size: 400% 400%;
+          animation: gradient-border-animation 3s ease infinite;
+          padding: 4px;
+          border-radius: 1.5rem;
+        }
+
+        .animated-border-content {
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 1.25rem;
+          position: relative;
+          z-index: 1;
+        }
+
+        .animated-border:hover {
+          box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
       `}</style>
       
       {/* Animated Background */}
@@ -66,8 +113,8 @@ export default function CompoundInterestPage() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* ========== SECTION 1: EDUCATIONAL CONTENT ========== */}
-        <div className="mb-16">
-          <h1 className="text-6xl font-bold text-white text-center mb-4">💰 The Power of Compound Interest</h1>
+        <div className="mb-16 fade-in-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
+          <h1 className="text-6xl font-bold text-white text-center mb-4">The Power of Compound Interest</h1>
           <p className="text-2xl text-cyan-300 text-center mb-8">Why starting early can make you rich!</p>
           
           {/* CTA Button to Simulator */}
@@ -82,7 +129,7 @@ export default function CompoundInterestPage() {
 
           {/* What is Compound Interest */}
           <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-cyan-400/30 mb-8">
-            <h2 className="text-4xl font-bold text-white mb-6 text-center">📚 What is Compound Interest?</h2>
+            <h2 className="text-4xl font-bold text-white mb-6 text-center"> What is Compound Interest?</h2>
             <div className="text-white text-xl space-y-4">
               <p className="text-center text-2xl text-cyan-200">
                 "Interest earning interest" - Your money makes money, and that money makes MORE money!
@@ -243,7 +290,7 @@ export default function CompoundInterestPage() {
         </div>
 
         {/* ========== SECTION 2: INTERACTIVE TIME MACHINE ========== */}
-        <div id="simulator" className="border-t-4 border-cyan-400 pt-16">
+        <div id="simulator" className="border-t-4 border-cyan-400 pt-16 fade-in-up" style={{ animationDelay: '0.3s', opacity: 0 }}>
           <h1 className="text-6xl font-bold text-white text-center mb-4">⏰ Time Machine Simulator</h1>
           <p className="text-2xl text-cyan-300 text-center mb-12">See YOUR money grow in real-time!</p>
 
