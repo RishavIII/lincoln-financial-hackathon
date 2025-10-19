@@ -93,7 +93,7 @@ export default function Questionnaire() {
 
         /* Glow effect instead of scale */
         .animated-border:hover {
-          filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5));
+          box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
         }
 
         /* Flying circles animations */
