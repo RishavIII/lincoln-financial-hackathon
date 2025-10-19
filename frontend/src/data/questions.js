@@ -36,9 +36,9 @@ export const questions = [
   },
   {
     id: "travel",
-    type:"agree",
-    title:"Do you travel often?",
-    options: []
+    type:"radio",
+    title:"How often do you travel, for business or leisure?",
+    options: ["Almost Never","Every 4+ Years","Every 2-3 Years","Yearly", "Multiple Times a Year",] // add more
   },
   {
     id:"health conditions",
