@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import Results from "./pages/Results"
 import Questionnaire from "./pages/Questionnaire";
+import Game from "./pages/Game";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/results" element={<Results />} />
             <Route path="/questionnaire" element={<Questionnaire />} />
+            <Route path="/game" element={<Game />} />
           </Routes>
         </main>
       </div>

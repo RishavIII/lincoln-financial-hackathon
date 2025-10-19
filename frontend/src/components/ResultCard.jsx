@@ -21,7 +21,8 @@ export default function ResultsCard({ title, premium, best_for, logo }) {
         )
     } else {
         return (
-            <div className="relative p-6 m-5 h-60 basis-1/4 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden group">
+            <div className="animated-border m-5 h-60 basis-1/4 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden group">
+                <div className="animated-border-content p-6 h-full relative overflow-hidden">
                 {/* Shimmer effect */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-blue-100/50 to-transparent"></div>
                 
@@ -44,6 +45,7 @@ export default function ResultsCard({ title, premium, best_for, logo }) {
                 
                 {/* Corner accent */}
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-200/30 to-blue-200/30 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
             </div>
         )
     } 

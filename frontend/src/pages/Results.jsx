@@ -168,6 +168,38 @@ export default function Results() {
         .fade-in-up {
           animation: fadeInUp 1s ease-out forwards;
         }
+        
+        @keyframes gradient-border-animation {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .animated-border {
+          position: relative;
+          background: linear-gradient(135deg, #3b82f6, #06b6d4, #10b981, #34d399, #6ee7b7, #3b82f6);
+          background-size: 400% 400%;
+          animation: gradient-border-animation 3s ease infinite;
+          padding: 4px;
+          border-radius: 1.5rem;
+        }
+
+        .animated-border-content {
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 1.25rem;
+          position: relative;
+          z-index: 1;
+        }
+
+        .animated-border:hover {
+          box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
 
         /* Flying circles */
         .flying-circle {
@@ -329,7 +361,8 @@ export default function Results() {
 
         {/* Total Cost */}
         <div className="mt-8 flex flex-row flex-wrap justify-center fade-in-up" style={{ animationDelay: '0.4s', opacity: 0 }}>
-          <div className="relative p-8 m-5 basis-full md:basis-1/2 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden group">
+          <div className="animated-border m-5 basis-full md:basis-1/2 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden group">
+            <div className="animated-border-content p-8 relative overflow-hidden">
             {/* Shimmer effect */}
             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-green-200/30 to-transparent"></div>
             
@@ -342,6 +375,7 @@ export default function Results() {
               <span className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
                 💰 Recommended for your profile
               </span>
+            </div>
             </div>
           </div>
         </div>
