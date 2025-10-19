@@ -1,5 +1,7 @@
 package com.example.demo.bedrock;
 
+import java.util.concurrent.ExecutionException;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -61,6 +63,7 @@ public class BedrockController {
 				.region(Region.US_EAST_1).build();
 		var modelId = "us.anthropic.claude-3-7-sonnet-20250219-v1:0";
 		
+		/*
 		JSONObject json = new JSONObject();
 		JSONArray inputArray = new JSONArray();
 		
@@ -74,11 +77,11 @@ public class BedrockController {
 		json.put("health",inputArray);
 		json.put("saving","6");
 		json.put("paycheck","7");
-		
+		*/
 		StringBuilder llmResponse = new StringBuilder();
 		String prompt = "Use the following array";
 		prompt=prompt.concat(new JSONArray(plans).toString());
-		prompt+="to output only the letter for health section option based on the json: " + json.toString();		
+		prompt+="to output only the letter for health section option based on the json: " + input.toString();		
 		prompt +="if you find that you have output more than one letter you must immediately stop.";
 		var message = Message.builder().content(ContentBlock.fromText(prompt)).role(ConversationRole.USER).build();
 		
@@ -101,7 +104,7 @@ public class BedrockController {
 		StringBuilder llmResponse1 = new StringBuilder();
 		prompt = "Use the following array";
 		prompt=prompt.concat(new JSONArray(plans).toString());
-		prompt+="to output only the letter for dental section option based on the json: " + json.toString();		
+		prompt+="to output only the letter for dental section option based on the json: " + input.toString();		
 		prompt +="if you find that you have output more than one letter you must immediately stop.";
 		var message1 = Message.builder().content(ContentBlock.fromText(prompt)).role(ConversationRole.USER).build();
 		
@@ -124,7 +127,7 @@ public class BedrockController {
 		StringBuilder llmResponse2 = new StringBuilder();
 		prompt = "Use the following array";
 		prompt=prompt.concat(new JSONArray(plans).toString());
-		prompt+="to output only the letter for vison section option based on the json: " + json.toString();		
+		prompt+="to output only the letter for vison section option based on the json: " + input.toString();		
 		prompt +="if you find that you have output more than one letter you must immediately stop.";
 		var message2 = Message.builder().content(ContentBlock.fromText(prompt)).role(ConversationRole.USER).build();
 		
@@ -147,7 +150,7 @@ public class BedrockController {
 		StringBuilder llmResponse3 = new StringBuilder();
 		prompt = "Use the following array";
 		prompt=prompt.concat(new JSONArray(plans).toString());
-		prompt+="to output only the letter for critical care section option based on the json: " + json.toString();		
+		prompt+="to output only the letter for critical care section option based on the json: " + input.toString();		
 		prompt +="if you find that you have output more than one letter you must immediately stop.";
 		var message3 = Message.builder().content(ContentBlock.fromText(prompt)).role(ConversationRole.USER).build();
 		
@@ -170,7 +173,7 @@ public class BedrockController {
 		StringBuilder llmResponse4 = new StringBuilder();
 		prompt = "Use the following array";
 		prompt=prompt.concat(new JSONArray(plans).toString());
-		prompt+="to output only the letter for caregiver section option based on the json: " + json.toString();		
+		prompt+="to output only the letter for caregiver section option based on the json: " + input.toString();		
 		prompt +="if you find that you have output more than one letter you must immediately stop.";
 		var message4 = Message.builder().content(ContentBlock.fromText(prompt)).role(ConversationRole.USER).build();
 		
