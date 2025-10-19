@@ -12,11 +12,19 @@ export default function Questionnaire() {
     setAnswers({ ...answers, [currentQuestion.id]: value });
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      console.log("Final answers:", JSON.stringify(answers, null, 2));
+      // send to back end
+      console.log(JSON.stringify(answers));
+      await fetch('/api/submit',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(answers)
+      });
     }
   };
 
@@ -25,7 +33,7 @@ export default function Questionnaire() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-2xl mx-auto">
         <div className="p-12 bg-blue-500 rounded-xl mb-8">
           <h2 className="text-5xl font-semibold text-white mb-4 text-center">
