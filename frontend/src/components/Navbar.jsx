@@ -16,9 +16,7 @@ export default function Navbar() {
 
   
   return (
-    <nav className={`sticky top-4 z-50 mx-4 rounded-2xl transition-all duration-300 ${
-      scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/5 shadow-sm'
-    }`}>
+    <nav className={`sticky top-4 z-50 mx-4 rounded-2xl transition-all duration-300 `}>
       <div className="max-w-8xl mx-auto px-6 py-3 flex items-center justify-between">
         <h1 className="text-xl font-bold text-[#4cae4f]">Insurapath</h1>
 

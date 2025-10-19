@@ -1,4 +1,31 @@
+<<<<<<< HEAD
+=======
+import Card from "../components/Card"
+import { useNavigate } from "react-router-dom"
+import { questions } from "../data/questions"
+
+>>>>>>> 6293774990e0e762c2f3277f04a680a218e50ec8
 export default function Dashboard() {
+  const navigate = useNavigate();
+  
+  const handleFindCoverage = () => {
+    // Check if questionnaire is completed
+    const savedAnswers = localStorage.getItem('questionnaireAnswers');
+    
+    if (savedAnswers) {
+      const answers = JSON.parse(savedAnswers);
+      const answeredQuestions = Object.keys(answers).length;
+      
+      // If all questions are answered, go to results
+      if (answeredQuestions >= questions.length) {
+        navigate('/results');
+        return;
+      }
+    }
+    
+    // Otherwise go to questionnaire
+    navigate('/questionnaire');
+  };
   return (
     <div className="p-8 min-h-screen relative overflow-hidden">
       <style>{`
@@ -366,7 +393,10 @@ export default function Dashboard() {
     
           {/* Button with simple green gradient border */}
           <div className="flex justify-center items-center fade-in-up" style={{ animationDelay: '0.4s', opacity: 0 }}>
-            <button className="gradient-border-btn h-20 px-8 py-2 text-white rounded-xl transition-all duration-300 font-semibold text-lg">
+            <button 
+              onClick={handleFindCoverage}
+              className="gradient-border-btn h-20 px-8 py-2 text-white rounded-xl transition-all duration-300 font-semibold text-lg"
+            >
               <span className="p-4">Find My Coverage</span>
             </button>
           </div>
