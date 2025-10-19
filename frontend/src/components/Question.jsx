@@ -101,4 +101,23 @@ export default function Question({type, title, options, value, onChange}) {
             </div>
         )
     }
+    if (type === "slider") {
+        return (
+            <div className="p-6 bg-white rounded-xl shadow hover:shadow-md transition">
+                <h3 className="font-semibold text-lg mb-4">{title}</h3>
+                <div className="flex items-center gap-4">
+                    <span>Strongly Disagree</span>
+                    <input
+                        type="range"
+                        min="0"
+                        max="10"
+                        value={value}
+                        onChange={(e) => onChange(e.target.value)}
+                        className="w-full slider"
+                    />
+                    <span>Strongly Agree</span>
+                </div>
+            </div>
+        );
+    }
 }

@@ -7,7 +7,7 @@ import Questionnaire from "./pages/Questionnaire";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-800">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-800 scrollbar-width: none overflow-hidden">
         <Navbar />
         <main className="">
           <Routes>
