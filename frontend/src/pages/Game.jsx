@@ -122,8 +122,7 @@ export default function CompoundInterestPage() {
             <button 
               onClick={() => document.getElementById('simulator').scrollIntoView({ behavior: 'smooth' })}
               className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-2xl px-12 py-6 rounded-2xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 hover:scale-110 shadow-2xl animate-pulse"
-            >
-              🚀 Try the Simulator Now!
+            >Try the Simulator Now!
             </button>
           </div>
 
@@ -136,21 +135,23 @@ export default function CompoundInterestPage() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 <div className="bg-green-500/20 rounded-2xl p-6 border-2 border-green-400 text-center">
-                  <div className="text-6xl mb-4">📈</div>
+                  <div className="text-6xl mb-4 flex justify-center">
+                    <img src="src/assets/game/growth.svg" className="h-20" alt="" />
+                  </div>
                   <div className="text-2xl font-bold text-green-300 mb-2">Year 1</div>
                   <div className="text-lg">You invest $1,000</div>
                   <div className="text-lg">Earn $70 (7%)</div>
                   <div className="text-3xl font-bold text-green-400 mt-2">= $1,070</div>
                 </div>
                 <div className="bg-blue-500/20 rounded-2xl p-6 border-2 border-blue-400 text-center">
-                  <div className="text-6xl mb-4">📊</div>
+                  <div className="text-6xl mb-4 flex justify-center"><img src="src/assets/game/growth.svg" className="h-20" alt="" /></div>
                   <div className="text-2xl font-bold text-blue-300 mb-2">Year 2</div>
                   <div className="text-lg">Now you have $1,070</div>
                   <div className="text-lg">Earn $75 (7% of $1,070)</div>
                   <div className="text-3xl font-bold text-blue-400 mt-2">= $1,145</div>
                 </div>
                 <div className="bg-purple-500/20 rounded-2xl p-6 border-2 border-purple-400 text-center">
-                  <div className="text-6xl mb-4">🚀</div>
+                  <div className="text-6xl mb-4 flex justify-center"><img src="src/assets/game/alarm.svg" className="h-20" alt="" /></div>
                   <div className="text-2xl font-bold text-purple-300 mb-2">Year 30</div>
                   <div className="text-lg">Let it grow...</div>
                   <div className="text-lg">Keep compounding!</div>
@@ -162,13 +163,15 @@ export default function CompoundInterestPage() {
 
           {/* Coffee Money Challenge */}
           <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-amber-400/30 mb-8">
-            <h2 className="text-4xl font-bold text-white mb-6 text-center">☕ The $217,000 Coffee</h2>
+            <h2 className="text-4xl font-bold text-white mb-6 text-center">  The $217,000 Coffee</h2>
             <p className="text-xl text-white/90 text-center mb-8">Your daily coffee habit is costing you a fortune!</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-gradient-to-br from-red-500/30 to-pink-600/30 rounded-3xl p-8 border-2 border-red-400">
                 <div className="text-center">
-                  <div className="text-8xl mb-4">☕</div>
+                  <div className="text-8xl mb-4 flex justify-center">
+                    <img src="src/assets/game/coffee.svg" className="h-20" alt="" />
+                  </div>
                   <div className="text-red-200 text-3xl font-bold mb-6">Buy $5 Coffee Daily</div>
                   <div className="text-white text-xl space-y-4">
                     <div className="bg-red-900/30 rounded-xl p-4">
@@ -182,7 +185,7 @@ export default function CompoundInterestPage() {
                     <div className="bg-red-900/30 rounded-xl p-4">
                       <div className="text-red-200">30 Years Total:</div>
                       <div className="text-5xl font-bold text-red-300">$54,750</div>
-                      <div className="text-sm text-red-200 mt-2">💸 All gone on coffee!</div>
+                      <div className="text-sm text-red-200 mt-2">All gone on lattes!</div>
                     </div>
                   </div>
                 </div>
@@ -190,7 +193,9 @@ export default function CompoundInterestPage() {
 
               <div className="bg-gradient-to-br from-green-500/30 to-emerald-600/30 rounded-3xl p-8 border-2 border-green-400">
                 <div className="text-center">
-                  <div className="text-8xl mb-4">🏠</div>
+                  <div className="text-8xl mb-4 flex justify-center">
+                    <img src="src/assets/game/house.svg" className="h-20" alt="" />
+                  </div>
                   <div className="text-green-200 text-3xl font-bold mb-6">Make Coffee at Home</div>
                   <div className="text-white text-xl space-y-4">
                     <div className="bg-green-900/30 rounded-xl p-4">
@@ -204,7 +209,7 @@ export default function CompoundInterestPage() {
                     <div className="bg-green-900/30 rounded-xl p-4">
                       <div className="text-green-200">Invested @ 7% for 30 years:</div>
                       <div className="text-5xl font-bold text-green-300">$217,000</div>
-                      <div className="text-sm text-green-200 mt-2">🚀 Down payment on a HOUSE!</div>
+                      <div className="text-sm text-green-200 mt-2"> Down payment on a house!</div>
                     </div>
                   </div>
                 </div>
@@ -212,8 +217,11 @@ export default function CompoundInterestPage() {
             </div>
 
             <div className="text-center mt-8 bg-yellow-500/20 border-2 border-yellow-400 rounded-2xl p-6">
+              <div className="text-8xl mb-4 flex justify-center">
+                <img src="src/assets/game/coin.svg" className="h-20" alt="" />
+              </div>
               <div className="text-yellow-200 text-3xl font-bold">
-                💰 Small daily expenses = BIG lifetime costs!
+                Small daily expenses = BIG lifetime costs!
               </div>
               <div className="text-white text-xl mt-2">
                 Think about: Lunch out ($10/day), Subscriptions ($50/mo), Impulse buys...
@@ -224,7 +232,9 @@ export default function CompoundInterestPage() {
           {/* Key Benefits Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-gradient-to-br from-blue-500/20 to-cyan-600/20 rounded-2xl p-6 border-2 border-blue-400">
-              <div className="text-6xl text-center mb-4">⏰</div>
+              <div className="text-6xl mb-4 flex justify-center">
+                <img src="src/assets/game/alarm.svg" className="h-20" alt="" />
+              </div>
               <h3 className="text-2xl font-bold text-blue-300 text-center mb-4">Time is Your Superpower</h3>
               <p className="text-white text-center">
                 The earlier you start, the less you need to save. Starting at 25 vs 35 can mean HUNDREDS of thousands more at retirement!
@@ -232,7 +242,9 @@ export default function CompoundInterestPage() {
             </div>
 
             <div className="bg-gradient-to-br from-green-500/20 to-emerald-600/20 rounded-2xl p-6 border-2 border-green-400">
-              <div className="text-6xl text-center mb-4">💤</div>
+              <div className="text-6xl mb-4 flex justify-center">
+                <img src="src/assets/game/bed.svg" className="h-20" alt="" />
+              </div>
               <h3 className="text-2xl font-bold text-green-300 text-center mb-4">Make Money While You Sleep</h3>
               <p className="text-white text-center">
                 Once you invest, compound interest works 24/7, 365 days a year. Your money is always growing, even when you're not thinking about it!
@@ -240,7 +252,9 @@ export default function CompoundInterestPage() {
             </div>
 
             <div className="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl p-6 border-2 border-purple-400">
-              <div className="text-6xl text-center mb-4">🎯</div>
+              <div className="text-6xl mb-4 flex justify-center">
+                <img src="src/assets/game/coin.svg" className="h-20" alt="" />
+              </div>
               <h3 className="text-2xl font-bold text-purple-300 text-center mb-4">Set It and Forget It</h3>
               <p className="text-white text-center">
                 Automate your investments. Even $50/month becomes $50,000+ in 30 years. Small, consistent actions = massive results!
@@ -250,7 +264,7 @@ export default function CompoundInterestPage() {
 
           {/* Rule of 72 */}
           <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-purple-400/30 mb-8">
-            <h2 className="text-4xl font-bold text-white mb-6 text-center">📐 The Rule of 72</h2>
+            <h2 className="text-4xl font-bold text-white mb-6 text-center">The Rule of 72</h2>
             <p className="text-xl text-white/90 text-center mb-8">Quick way to calculate when your money will DOUBLE!</p>
             
             <div className="bg-gradient-to-br from-purple-500/30 to-pink-600/30 rounded-3xl p-8 border-2 border-purple-400 mb-6">
@@ -291,36 +305,40 @@ export default function CompoundInterestPage() {
 
         {/* ========== SECTION 2: INTERACTIVE TIME MACHINE ========== */}
         <div id="simulator" className="border-t-4 border-cyan-400 pt-16 fade-in-up" style={{ animationDelay: '0.3s', opacity: 0 }}>
-          <h1 className="text-6xl font-bold text-white text-center mb-4">⏰ Time Machine Simulator</h1>
+          <h1 className="text-6xl font-bold text-white text-center mb-4">
+            <div className="text-8xl mb-4 flex justify-center">
+                <img src="src/assets/game/coin.svg" className="h-20" alt="" />
+              </div>
+            Time Machine Simulator</h1>
           <p className="text-2xl text-cyan-300 text-center mb-12">See YOUR money grow in real-time!</p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Controls */}
             <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-cyan-400/30">
-              <h2 className="text-3xl font-bold text-white mb-6">⚡ Your Numbers</h2>
+              <h2 className="text-3xl font-bold text-white mb-6">Your Numbers</h2>
               
               <div className="mb-6">
-                <label className="text-white font-semibold text-lg mb-2 block">💰 Starting Amount: ${principal.toLocaleString()}</label>
+                <label className="text-white font-semibold text-lg mb-2 block">Starting Amount: ${principal.toLocaleString()}</label>
                 <input type="range" min="100" max="50000" step="100" value={principal} onChange={(e) => setPrincipal(Number(e.target.value))} className="w-full h-3 bg-gradient-to-r from-green-400 to-emerald-600 rounded-lg" />
               </div>
 
               <div className="mb-6">
-                <label className="text-white font-semibold text-lg mb-2 block">📅 Monthly Contribution: ${monthlyContribution}/mo</label>
+                <label className="text-white font-semibold text-lg mb-2 block">Monthly Contribution: ${monthlyContribution}/mo</label>
                 <input type="range" min="0" max="2000" step="50" value={monthlyContribution} onChange={(e) => setMonthlyContribution(Number(e.target.value))} className="w-full h-3 bg-gradient-to-r from-blue-400 to-cyan-600 rounded-lg" />
               </div>
 
               <div className="mb-6">
-                <label className="text-white font-semibold text-lg mb-2 block">📈 Interest Rate: {interestRate}%</label>
+                <label className="text-white font-semibold text-lg mb-2 block">Interest Rate: {interestRate}%</label>
                 <input type="range" min="1" max="15" step="0.5" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="w-full h-3 bg-gradient-to-r from-purple-400 to-pink-600 rounded-lg" />
               </div>
 
               <div className="mb-8">
-                <label className="text-white font-semibold text-lg mb-2 block">⏳ Time Period: {years} years</label>
+                <label className="text-white font-semibold text-lg mb-2 block">Time Period: {years} years</label>
                 <input type="range" min="1" max="40" step="1" value={years} onChange={(e) => setYears(Number(e.target.value))} className="w-full h-3 bg-gradient-to-r from-orange-400 to-red-600 rounded-lg" />
               </div>
 
               <button onClick={fastForward} disabled={isAnimating} className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-2xl py-6 rounded-2xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 disabled:opacity-50 shadow-2xl">
-                {isAnimating ? '⚡ Time Traveling...' : '🚀 Fast Forward!'}
+                {isAnimating ? 'Time Traveling...' : 'Fast Forward!'}
               </button>
 
               <div className="grid grid-cols-3 gap-4 mt-6">
@@ -341,7 +359,7 @@ export default function CompoundInterestPage() {
 
             {/* Tree Visualization */}
             <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-cyan-400/30 relative">
-              <h2 className="text-3xl font-bold text-white mb-6">🌳 Watch It Grow!</h2>
+              <h2 className="text-3xl font-bold text-white mb-6">Watch It Grow!</h2>
               
               {isAnimating && (
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
@@ -363,9 +381,9 @@ export default function CompoundInterestPage() {
 
               {!isAnimating && currentYear === years && (
                 <div className="mt-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-6 text-center shadow-2xl animate-pulse">
-                  <div className="text-white text-2xl font-bold mb-2">🎉 After {years} years, you'll have:</div>
+                  <div className="text-white text-2xl font-bold mb-2">After {years} years, you'll have:</div>
                   <div className="text-white text-6xl font-black">${futureValue.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
-                  <div className="text-white/90 text-xl mt-2">You earned ${totalGain.toLocaleString(undefined, {maximumFractionDigits: 0})} in FREE MONEY! 🚀</div>
+                  <div className="text-white/90 text-xl mt-2">You earned ${totalGain.toLocaleString(undefined, {maximumFractionDigits: 0})} in compound interest!</div>
                 </div>
               )}
             </div>
