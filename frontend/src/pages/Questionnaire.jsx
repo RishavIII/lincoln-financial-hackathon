@@ -17,6 +17,7 @@ export default function Questionnaire() {
       setCurrentIndex(currentIndex + 1);
     } else {
       // send to back end
+      console.log(JSON.stringify(answers));
       await fetch('/api/submit',{
         method: 'POST',
         headers: {
