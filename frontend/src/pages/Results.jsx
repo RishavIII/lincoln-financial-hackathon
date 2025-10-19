@@ -657,14 +657,41 @@ export default function Results() {
 
   const getReasonForTier = (type) => {
     const answers = JSON.parse(localStorage.getItem('questionnaireAnswers') || '{}');
-    const reasons = [];
     
-    if (answers.travel_frequency === 'frequently') reasons.push('frequent travel');
-    if (answers.chronic_conditions?.length > 0) reasons.push('chronic conditions');
-    if (answers.family_size > 3) reasons.push('large family');
-    if (answers.age_group === 'senior') reasons.push('age considerations');
-    
-    return reasons.length > 0 ? `Based on: ${reasons.join(', ')}` : 'Based on your profile';
+    switch(type) {
+      case 'health':
+        if (answers.chronic_conditions?.length > 0) return 'You have ongoing medical needs';
+        if (answers.travel_frequency === 'frequently') return 'Frequent travel requires flexible coverage';
+        if (answers.family_size > 3) return 'Large family needs comprehensive protection';
+        if (answers.age_group === 'senior') return 'Age-appropriate healthcare coverage';
+        return 'Balanced coverage for your lifestyle';
+      
+      case 'dental':
+        if (answers.family_size > 2) return 'Family dental care needs';
+        if (answers.age_group === 'senior') return 'Preventive dental care for your age';
+        return 'Routine dental maintenance';
+      
+      case 'vision':
+        if (answers.work_environment === 'office' || answers.screen_time === 'high') return 'Extended screen time protection';
+        if (answers.outdoor_activities === 'frequently') return 'Active outdoor lifestyle coverage';
+        if (answers.age_group === 'senior') return 'Age-related vision care';
+        return 'Regular eye health maintenance';
+      
+      case 'critical':
+        if (answers.chronic_conditions?.length > 0) return 'Chronic conditions require extra protection';
+        if (answers.family_history?.includes('heart') || answers.family_history?.includes('cancer')) return 'Family medical history considerations';
+        if (answers.high_risk_activities === 'yes') return 'High-risk activities need coverage';
+        if (answers.outdoor_activities === 'frequently') return 'Active lifestyle protection';
+        return 'Financial security for unexpected illness';
+      
+      case 'caregiver':
+        if (answers.dependents > 0 || answers.elderly_care === 'yes') return 'Caregiving responsibilities identified';
+        if (answers.family_size > 3) return 'Large family support needs';
+        return 'Future caregiving preparation';
+      
+      default:
+        return 'Tailored to your profile';
+    }
   };
 
   const downloadPDF = () => {
