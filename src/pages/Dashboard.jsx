@@ -1,7 +1,7 @@
 export default function Dashboard() {
   return (
     <div className="p-8">
-        <div className="p-12 bg-red-500">
+        <div className="p-12">
           <h2 className="text-3xl font-semibold text-gray-800 mb-4 ">
             Dashboard
           </h2>

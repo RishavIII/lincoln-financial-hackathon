@@ -5,9 +5,9 @@ import Dashboard from "./pages/Dashboard";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="">
+      <div className="min-h-screen bg-gradient-to-br from-green-400 via-green-500 to-emerald-600">
         <Navbar />
-        <main className="min-h-screen min-w-screen bg-linear-to-r from-cyan-500 to-blue-500 ">
+        <main className="">
           <Routes>
             <Route path="/" element={<Dashboard />} />
           </Routes>
