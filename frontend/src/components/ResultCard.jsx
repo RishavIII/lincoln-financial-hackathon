@@ -7,9 +7,9 @@ export default function ResultsCard({ title, premium, best_for, logo }) {
         )
     } else {
         return (
-            <div className="p-6 m-5 h-60 basis-1/4 bg-white rounded-xl shadow hover:shadow-md transition">
+            <div className="hover:scale-105 p-6 m-5 h-60 basis-1/4 bg-white rounded-xl shadow hover:shadow-md transition">
                 <h2 className="font-black text-3xl mb-2">{title}</h2>
-                <p className="text-gray-500 text-xl"><strong className="">Monthly Premium:</strong> {premium}</p>
+                <p className="text-xl"><strong className="text-green-600">Monthly Premium:</strong> {premium}</p>
                 <p className="pt-2 text-l"><strong>Best for</strong>: {best_for}</p>
             </div>
         )
