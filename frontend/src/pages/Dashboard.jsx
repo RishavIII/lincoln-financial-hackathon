@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-=======
 import Card from "../components/Card"
 import { useNavigate } from "react-router-dom"
 import { questions } from "../data/questions"
 
->>>>>>> 6293774990e0e762c2f3277f04a680a218e50ec8
 export default function Dashboard() {
   const navigate = useNavigate();
   

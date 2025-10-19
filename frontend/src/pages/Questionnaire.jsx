@@ -29,7 +29,7 @@ export default function Questionnaire() {
       setCurrentIndex(currentIndex + 1);
     } else {
       console.log(JSON.stringify(answers));
-<<<<<<< HEAD
+
       await fetch('http://localhost:8080/process',{
         method: 'POST',
         headers: {
@@ -37,20 +37,6 @@ export default function Questionnaire() {
         },
         body: JSON.stringify(answers)
       });
-=======
-      try {
-        await fetch('/api/submit',{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(answers)
-        });
-      } catch (error) {
-        console.log('API call failed, continuing to results');
-      }
-      navigate('/results');
->>>>>>> 6293774990e0e762c2f3277f04a680a218e50ec8
     }
   };
 
@@ -59,17 +45,6 @@ export default function Questionnaire() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen p-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="p-12 bg-[#4cae4f] rounded-xl mb-8">
-          <h2 className="text-5xl font-semibold text-white mb-4 text-center">
-            Questionnaire
-          </h2>
-          <p className="text-white text-center">
-            Question {currentIndex + 1} of {questions.length}
-          </p>
-=======
     <div className="min-h-screen p-4 md:p-8 relative overflow-hidden flex items-center justify-center">
       <style>{`
         @keyframes gradient-bg {
@@ -235,7 +210,6 @@ export default function Questionnaire() {
               </p>
             </div>
           </div>
->>>>>>> 6293774990e0e762c2f3277f04a680a218e50ec8
         </div>
 
         {/* Question Card with animated border */}
@@ -254,17 +228,7 @@ export default function Questionnaire() {
             disabled={currentIndex === 0}
             className="px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-2xl hover:scale-105 transition-all duration-300 disabled:hover:scale-100"
           >
-<<<<<<< HEAD
-            Back
-          </button>
-          <button 
-            onClick={handleNext}
-            className="px-6 py-2 bg-[#4cae4f] text-white rounded hover:bg-[#80c684]"
-          >
-            {currentIndex === questions.length - 1 ? "Submit" : "Next"}
-=======
             ← Back
->>>>>>> 6293774990e0e762c2f3277f04a680a218e50ec8
           </button>
           
           <div className="animated-border flex-1 transition-all duration-300">
