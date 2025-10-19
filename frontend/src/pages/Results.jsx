@@ -153,6 +153,21 @@ export default function Results() {
         .animate-float-delayed {
           animation: float-delayed 10s ease-in-out infinite;
         }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .fade-in-up {
+          animation: fadeInUp 1s ease-out forwards;
+        }
 
         /* Flying circles */
         .flying-circle {
@@ -265,7 +280,7 @@ export default function Results() {
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 fade-in-up">
           <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">
             Your Personalized Insurance Plan
           </h1>
@@ -275,7 +290,7 @@ export default function Results() {
         </div>
 
         {/* Cards Grid */}
-        <div className="p-12 flex flex-row flex-wrap justify-center w-full">
+        <div className="p-12 flex flex-row flex-wrap justify-center w-full fade-in-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
           <ResultsCard
               title="Logo"
               logo={true}
@@ -313,7 +328,7 @@ export default function Results() {
         </div>
 
         {/* Total Cost */}
-        <div className="mt-8 flex flex-row flex-wrap justify-center">
+        <div className="mt-8 flex flex-row flex-wrap justify-center fade-in-up" style={{ animationDelay: '0.4s', opacity: 0 }}>
           <div className="relative p-8 m-5 basis-full md:basis-1/2 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden group">
             {/* Shimmer effect */}
             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-green-200/30 to-transparent"></div>
@@ -332,7 +347,7 @@ export default function Results() {
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-8 flex justify-center gap-4 fade-in-up" style={{ animationDelay: '0.6s', opacity: 0 }}>
           <button className="px-8 py-4 bg-white/95 backdrop-blur-sm text-gray-800 font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
             📄 Download Summary
           </button>

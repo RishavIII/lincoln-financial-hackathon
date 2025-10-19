@@ -1,345 +1,207 @@
-import { useState } from "react";
-import Question from "../components/Question";
-import { questions } from "../data/questions";
-
-export default function Questionnaire() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
-
-  const currentQuestion = questions[currentIndex];
-
-  const handleAnswer = (value) => {
-    setAnswers({ ...answers, [currentQuestion.id]: value });
-  };
-
-  const handleNext = async () => {
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      // send to back end
-      console.log(JSON.stringify(answers));
-      await fetch('/api/submit',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(answers)
-      });
-    }
-  };
-
-  const handleBack = () => {
-    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
-  };
-
-  return (
-    <div className="min-h-screen p-4 md:p-8 relative overflow-hidden flex items-center justify-center">
-      <style>{`
-        @keyframes gradient-bg {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        
-        .animated-bg {
-          background: linear-gradient(-45deg, #1e3a8a, #1e40af, #0e7490, #047857, #059669);
-          background-size: 400% 400%;
-          animation: gradient-bg 15s ease infinite;
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          50% { transform: translateY(-20px) translateX(10px); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          50% { transform: translateY(20px) translateX(-10px); }
-        }
-
-        @keyframes fromTopLeft {
-          0% {
-            transform: translate(-150px, -150px);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(calc(100vw + 150px), calc(100vh + 150px));
-            opacity: 0;
-          }
-        }
-
-        @keyframes fromTopRight {
-          0% {
-            transform: translate(150px, -150px);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(calc(-100vw - 150px), calc(100vh + 150px));
-            opacity: 0;
-          }
-        }
-
-        @keyframes fromBottomLeft {
-          0% {
-            transform: translate(-150px, 150px);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(calc(100vw + 150px), calc(-100vh - 150px));
-            opacity: 0;
-          }
-        }
-
-        @keyframes fromBottomRight {
-          0% {
-            transform: translate(150px, 150px);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(calc(-100vw - 150px), calc(-100vh - 150px));
-            opacity: 0;
-          }
-        }
-
-        @keyframes fromLeftEdge {
-          0% {
-            transform: translate(-150px, 0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(calc(100vw + 150px), 0);
-            opacity: 0;
-          }
-        }
-
-        @keyframes fromRightEdge {
-          0% {
-            transform: translate(150px, 0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(calc(-100vw - 150px), 0);
-            opacity: 0;
-          }
-        }
-
-        @keyframes fromBottomUp {
-          0% {
-            transform: translate(0, 150px);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate(0, calc(-100vh - 150px));
-            opacity: 0;
-          }
-        }
-        
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 10s ease-in-out infinite;
-        }
-
-        .flying-circle {
-          position: absolute;
-          border-radius: 50%;
-          pointer-events: none;
-        }
-
-        .circle-1 {
-          width: 100px;
-          height: 100px;
-          background: radial-gradient(circle, rgba(52, 211, 153, 0.8), rgba(52, 211, 153, 0));
-          top: 0;
-          left: 0;
-          animation: fromTopLeft 20s linear infinite;
-        }
-
-        .circle-2 {
-          width: 150px;
-          height: 150px;
-          background: radial-gradient(circle, rgba(16, 185, 129, 0.6), rgba(16, 185, 129, 0));
-          top: 0;
-          right: 0;
-          animation: fromTopRight 25s linear infinite;
-          animation-delay: 5s;
-        }
-
-        .circle-3 {
-          width: 80px;
-          height: 80px;
-          background: radial-gradient(circle, rgba(110, 231, 183, 0.7), rgba(110, 231, 183, 0));
-          bottom: 0;
-          left: 0;
-          animation: fromBottomLeft 18s linear infinite;
-          animation-delay: 8s;
-        }
-
-        .circle-4 {
-          width: 120px;
-          height: 120px;
-          background: radial-gradient(circle, rgba(5, 150, 105, 0.5), rgba(5, 150, 105, 0));
-          bottom: 0;
-          right: 0;
-          animation: fromBottomRight 22s linear infinite;
-          animation-delay: 3s;
-        }
-
-        .circle-5 {
-          width: 90px;
-          height: 90px;
-          background: radial-gradient(circle, rgba(52, 211, 153, 0.6), rgba(52, 211, 153, 0));
-          top: 50%;
-          left: 0;
-          animation: fromLeftEdge 16s linear infinite;
-          animation-delay: 10s;
-        }
-
-        .circle-6 {
-          width: 110px;
-          height: 110px;
-          background: radial-gradient(circle, rgba(16, 185, 129, 0.7), rgba(16, 185, 129, 0));
-          top: 50%;
-          right: 0;
-          animation: fromRightEdge 19s linear infinite;
-          animation-delay: 15s;
-        }
-
-        .circle-7 {
-          width: 95px;
-          height: 95px;
-          background: radial-gradient(circle, rgba(110, 231, 183, 0.65), rgba(110, 231, 183, 0));
-          bottom: 0;
-          left: 25%;
-          animation: fromBottomUp 21s linear infinite;
-          animation-delay: 2s;
-        }
-
-        .circle-8 {
-          width: 105px;
-          height: 105px;
-          background: radial-gradient(circle, rgba(5, 150, 105, 0.55), rgba(5, 150, 105, 0));
-          bottom: 0;
-          right: 30%;
-          animation: fromBottomUp 24s linear infinite;
-          animation-delay: 12s;
-        }
-      `}</style>
-      
-      {/* Animated Background */}
-      <div className="fixed inset-0 animated-bg -z-10"></div>
-      
-      {/* Flying circles from different edges */}
-      <div className="fixed inset-0 overflow-visible pointer-events-none z-0">
-        <div className="flying-circle circle-1"></div>
-        <div className="flying-circle circle-2"></div>
-        <div className="flying-circle circle-3"></div>
-        <div className="flying-circle circle-4"></div>
-        <div className="flying-circle circle-5"></div>
-        <div className="flying-circle circle-6"></div>
-        <div className="flying-circle circle-7"></div>
-        <div className="flying-circle circle-8"></div>
-      </div>
-
-      {/* Floating blurred shapes */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-green-400/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl animate-float-delayed"></div>
-        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse"></div>
-      </div>
-
-      <div className="w-full max-w-3xl mx-auto relative z-10">
-        {/* Header - Fixed size */}
-        <div className="p-8 bg-blue-500/90 backdrop-blur-sm rounded-2xl mb-6 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-[1.01]">
-          <h2 className="text-4xl md:text-5xl font-bold text-white text-center drop-shadow-lg">
-            Questionnaire
-          </h2>
-          <div className="mt-4 flex items-center justify-center gap-3">
-            <div className="flex-1 max-w-md h-2 bg-white/20 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-gradient-to-r from-white to-green-300 transition-all duration-500 ease-out"
-                style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
-              ></div>
+export default function Question({type, title, options, value, onChange}) {
+    if (type === "radio"){
+        return (
+            <div className="relative p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+                
+                <h3 className="font-semibold text-lg mb-4 relative z-10">{title}</h3>
+                <div className="space-y-2 relative z-10">
+                    {options?.map((option, i) => (
+                        <label key={i} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-blue-50 transition-all duration-200 hover:translate-x-2">
+                            <input 
+                                type="radio" 
+                                name={title}
+                                value={option}
+                                checked={value === option}
+                                onChange={(e) => onChange(e.target.value)}
+                                className="w-4 h-4 text-blue-600"
+                            />
+                            <span className={value === option ? 'font-semibold text-blue-600' : ''}>{option}</span>
+                        </label>
+                    ))}
+                </div>
             </div>
-            <p className="text-white font-semibold text-lg whitespace-nowrap">
-              {currentIndex + 1} / {questions.length}
-            </p>
-          </div>
-        </div>
+        )
+    }
 
-        {/* Question Card - Consistent height */}
-        <div className="min-h-[300px]">
-          <Question 
-            {...currentQuestion}
-            value={answers[currentQuestion.id] || (currentQuestion.type === "checkbox" ? [] : "")}
-            onChange={handleAnswer}
-          /> 
-        </div>
+    if (type === "agree"){
+        const agreeOptions = ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"];
+        return (
+            <div className="relative p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-green-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <h3 className="font-semibold text-lg mb-4 relative z-10">{title}</h3>
+                <div className="flex gap-3 flex-wrap relative z-10">
+                    {agreeOptions.map((option, i) => (
+                        <label key={i} className="flex flex-col items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-green-50 transition-all duration-200 group/option">
+                            <input 
+                                type="radio" 
+                                name={title}
+                                value={option}
+                                checked={value === option}
+                                onChange={(e) => onChange(e.target.value)}
+                                className="w-4 h-4 text-green-600"
+                            />
+                            <span className={`text-sm text-center ${value === option ? 'font-bold text-green-600 scale-110' : 'group-hover/option:scale-105'} transition-all duration-200`}>
+                                {option}
+                            </span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+        )
+    }
 
-        {/* Navigation Buttons - Aligned */}
-        <div className="flex gap-4 mt-6">
-          <button 
-            onClick={handleBack}
-            disabled={currentIndex === 0}
-            className="px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-2xl hover:scale-105 transition-all duration-300 disabled:hover:scale-100"
-          >
-            ← Back
-          </button>
-          <button 
-            onClick={handleNext}
-            className="flex-1 relative px-8 py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 overflow-hidden group"
-          >
-            <span className="relative z-10">
-              {currentIndex === questions.length - 1 ? "Submit ✓" : "Next →"}
-            </span>
-            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+    if (type === "dropdown"){
+        return(
+            <div className="relative p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                {/* Pulse background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <h3 className="font-semibold text-lg mb-4 relative z-10">{title}</h3>
+                <select 
+                    className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 relative z-10 hover:border-blue-400"
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
+                >
+                    <option value="">Select...</option>
+                    {options?.map((option, i) => (
+                        <option key={i} value={option}>{option}</option>
+                    ))}
+                </select>
+            </div>
+        )
+    }
+
+    if (type === "date"){
+        return(
+            <div className="relative p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                {/* Animated gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <h3 className="font-semibold text-lg mb-4 relative z-10">{title}</h3>
+                <input 
+                    type="date"
+                    className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 relative z-10 hover:border-purple-400"
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
+                />
+            </div>
+        )
+    }
+
+    if (type === "checkbox"){
+        const currentValue = value || [];
+        return(
+            <div className="relative p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                {/* Floating circles */}
+                <div className="absolute top-2 right-2 w-20 h-20 bg-teal-200/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <h3 className="font-semibold text-lg mb-4 relative z-10">{title}</h3>
+                <div className="space-y-2 relative z-10">
+                    {options?.map((option, i) => (
+                        <label key={i} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-teal-50 transition-all duration-200 hover:translate-x-2 group/checkbox">
+                            <input
+                                type="checkbox"
+                                name={option}
+                                checked={currentValue.includes(option)}
+                                onChange={(e) => {
+                                    const newValue = e.target.checked
+                                        ? [...currentValue, option]
+                                        : currentValue.filter((item) => item !== option);
+                                    onChange(newValue);
+                                }}
+                                className="w-4 h-4 text-teal-600 rounded"
+                            />
+                            <span className={currentValue.includes(option) ? 'font-semibold text-teal-600' : 'group-hover/checkbox:text-teal-600'}>{option}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+    
+    if (type === "slider") {
+        return (
+            <div className="relative p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                <style>{`
+                    .custom-slider {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        height: 8px;
+                        border-radius: 5px;
+                        background: linear-gradient(to right, #ef4444 0%, #f59e0b 50%, #10b981 100%);
+                        outline: none;
+                    }
+                    
+                    .custom-slider::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        background: white;
+                        cursor: pointer;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                        border: 3px solid #3b82f6;
+                        transition: all 0.2s;
+                    }
+                    
+                    .custom-slider::-webkit-slider-thumb:hover {
+                        transform: scale(1.2);
+                        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+                    }
+                    
+                    .custom-slider::-moz-range-thumb {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        background: white;
+                        cursor: pointer;
+                        border: 3px solid #3b82f6;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                        transition: all 0.2s;
+                    }
+                    
+                    .custom-slider::-moz-range-thumb:hover {
+                        transform: scale(1.2);
+                        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+                    }
+                `}</style>
+                
+                {/* Animated gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-red-50/50 via-yellow-50/50 to-green-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <h3 className="font-semibold text-lg mb-6 relative z-10">{title}</h3>
+                <div className="relative z-10">
+                    <div className="flex items-center gap-4">
+                        <span className="text-sm font-medium whitespace-nowrap">Strongly Disagree</span>
+                        <div className="flex-1 relative">
+                            <input
+                                type="range"
+                                min="0"
+                                max="10"
+                                value={value || 5}
+                                onChange={(e) => onChange(e.target.value)}
+                                className="w-full custom-slider"
+                            />
+                            {/* Value bubble */}
+                            <div 
+                                className="absolute -top-10 bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg transition-all duration-200"
+                                style={{
+                                    left: `calc(${((value || 5) / 10) * 100}% - 20px)`
+                                }}
+                            >
+                                {value || 5}
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-600"></div>
+                            </div>
+                        </div>
+                        <span className="text-sm font-medium whitespace-nowrap">Strongly Agree</span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
