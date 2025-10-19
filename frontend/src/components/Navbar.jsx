@@ -20,7 +20,7 @@ export default function Navbar() {
       scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/5 shadow-sm'
     }`}>
       <div className="max-w-8xl mx-auto px-6 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-[#4cae4f]">InsuraPath</h1>
+        <h1 className="text-xl font-bold text-[#4cae4f]">Insurapath</h1>
 
         <div className="flex gap-6 ">
           <NavbarLink
