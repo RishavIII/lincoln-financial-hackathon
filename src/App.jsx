@@ -6,7 +6,7 @@ import Results from "./pages/Results"
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gradient-to-br from-green-400 via-green-500 to-emerald-600">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-800">
         <Navbar />
         <main className="">
           <Routes>
