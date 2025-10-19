@@ -6,21 +6,6 @@ export default function Dashboard() {
   const navigate = useNavigate();
   
   const handleFindCoverage = () => {
-    // Check if questionnaire is completed
-    const savedAnswers = localStorage.getItem('questionnaireAnswers');
-    
-    if (savedAnswers) {
-      const answers = JSON.parse(savedAnswers);
-      const answeredQuestions = Object.keys(answers).length;
-      
-      // If all questions are answered, go to results
-      if (answeredQuestions >= questions.length) {
-        navigate('/results');
-        return;
-      }
-    }
-    
-    // Otherwise go to questionnaire
     navigate('/questionnaire');
   };
   return (

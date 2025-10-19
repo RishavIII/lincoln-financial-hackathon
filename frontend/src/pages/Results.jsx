@@ -3,7 +3,7 @@ import chatGptLogo from "../assets/ChatGPT Image Oct 19, 2025, 07_25_55 AM.svg";
 import jsPDF from 'jspdf';
 
 // ResultCard Component
-function ResultsCard({ title, premium, best_for, tier }) {
+function ResultsCard({ title, premium, best_for, tier, reason }) {
   const tierColors = {
     A: "from-emerald-400 to-green-600",
     B: "from-blue-500 to-indigo-600", 
@@ -18,12 +18,12 @@ function ResultsCard({ title, premium, best_for, tier }) {
 
   return (
     <div className="animated-border m-5 basis-full md:basis-1/3 lg:basis-1/4 transition-all duration-300 hover:scale-105 min-h-[280px]">
-      <div className="animated-border-content p-6 overflow-hidden group relative h-full">
+      <div className="animated-border-content p-6 overflow-hidden group relative h-full flex flex-col">
         <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-blue-100/30 to-transparent"></div>
         
-        <div className="relative z-10">
+        <div className="relative z-10 flex-1 flex flex-col">
           <div className="flex items-start justify-between mb-4">
-            <h3 className="text-xl font-bold text-gray-800 flex-1">{title}</h3>
+            <h3 className="text-xl font-bold text-gray-800 flex-1">{title.replace(/ \(Option [ABC]\)/g, '')}</h3>
             {tier && (
               <span className={`px-3 py-1 rounded-full text-sm font-semibold ${tierBadgeColors[tier]}`}>
                 Tier {tier}
@@ -35,9 +35,15 @@ function ResultsCard({ title, premium, best_for, tier }) {
             {premium}<span className="text-lg">/mo</span>
           </div>
           
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-gray-600 text-sm leading-relaxed mb-3">
             {best_for}
           </p>
+          
+          {reason && (
+            <div className="text-xs text-blue-600 italic mt-auto pt-2 border-t border-gray-200">
+              💡 {reason}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -649,6 +655,18 @@ export default function Results() {
 
   const totalCost = calculateTotalCost();
 
+  const getReasonForTier = (type) => {
+    const answers = JSON.parse(localStorage.getItem('questionnaireAnswers') || '{}');
+    const reasons = [];
+    
+    if (answers.travel_frequency === 'frequently') reasons.push('frequent travel');
+    if (answers.chronic_conditions?.length > 0) reasons.push('chronic conditions');
+    if (answers.family_size > 3) reasons.push('large family');
+    if (answers.age_group === 'senior') reasons.push('age considerations');
+    
+    return reasons.length > 0 ? `Based on: ${reasons.join(', ')}` : 'Based on your profile';
+  };
+
   const downloadPDF = () => {
     const doc = new jsPDF();
     const answers = JSON.parse(localStorage.getItem('questionnaireAnswers') || '{}');
@@ -740,7 +758,7 @@ export default function Results() {
         {/* Header */}
         <div className="text-center mb-12 fade-in-up">
           <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">
-            Your Personalized Insurance Plan
+            Your Personalized AI Insurance Plan
           </h1>
           <p className="text-xl text-white/90 drop-shadow">
             Based on your responses, here's what we recommend
@@ -768,6 +786,7 @@ export default function Results() {
             premium={planDetails.health[recommendations?.health]?.premium || "$245"}
             best_for={planDetails.health[recommendations?.health]?.description || "Standard coverage"}
             tier={recommendations?.health}
+            reason={getReasonForTier('health')}
           />
 
           <ResultsCard
@@ -775,6 +794,7 @@ export default function Results() {
             premium={planDetails.dental[recommendations?.dental]?.premium || "$45"}
             best_for={planDetails.dental[recommendations?.dental]?.description || "Routine dental care"}
             tier={recommendations?.dental}
+            reason={getReasonForTier('dental')}
           />
 
           <ResultsCard
@@ -782,6 +802,7 @@ export default function Results() {
             premium={planDetails.vision[recommendations?.vison]?.premium || "$20"}
             best_for={planDetails.vision[recommendations?.vison]?.description || "Regular eye exams"}
             tier={recommendations?.vison}
+            reason={getReasonForTier('vision')}
           />
 
           <ResultsCard
@@ -789,6 +810,7 @@ export default function Results() {
             premium={planDetails.criticalCare[recommendations?.["critical care"]]?.premium || "$320"}
             best_for={planDetails.criticalCare[recommendations?.["critical care"]]?.description || "Critical illness protection"}
             tier={recommendations?.["critical care"]}
+            reason={getReasonForTier('critical')}
           />
 
           <ResultsCard
@@ -796,6 +818,7 @@ export default function Results() {
             premium={planDetails.caregiver[recommendations?.caregiver]?.premium || "$40"}
             best_for={planDetails.caregiver[recommendations?.caregiver]?.description || "Long-term care support"}
             tier={recommendations?.caregiver}
+            reason={getReasonForTier('caregiver')}
           />
         </div>
 
