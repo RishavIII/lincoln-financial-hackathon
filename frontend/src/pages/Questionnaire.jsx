@@ -7,6 +7,7 @@ export default function Questionnaire() {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Load saved answers
   useEffect(() => {
@@ -25,20 +26,44 @@ export default function Questionnaire() {
   };
 
   const handleNext = async () => {
+    // Check if current question is answered
+    const currentAnswer = answers[currentQuestion.id];
+    if (!currentAnswer || (Array.isArray(currentAnswer) && currentAnswer.length === 0)) {
+      return; // Don't proceed if no answer
+    }
+
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      console.log(JSON.stringify(answers));
-
-      await fetch('http://localhost:8080/process',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(answers)
-      });
+      setIsSubmitting(true);
+      
+      // Mark questionnaire as completed
+      localStorage.setItem('questionnaireCompleted', 'true');
+      
+      try {
+        await fetch('http://localhost:8080/process', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(answers)
+        });
+      } catch (error) {
+        console.log('Backend not available, proceeding to results');
+      }
+      
+      // Navigate to results page
+      navigate('/results');
     }
   };
+
+  // Check if current question is answered
+  const isAnswered = () => {
+    const currentAnswer = answers[currentQuestion.id];
+    return currentAnswer && (!Array.isArray(currentAnswer) || currentAnswer.length > 0);
+  };
+
+  const isLastQuestion = currentIndex === questions.length - 1;
 
   const handleBack = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
@@ -231,17 +256,37 @@ export default function Questionnaire() {
             ← Back
           </button>
           
-          <div className="animated-border flex-1 transition-all duration-300">
+          {/* Button with loading state */}
+          {isAnswered() && !isSubmitting ? (
+            <div className="animated-border flex-1 transition-all duration-300">
+              <button 
+                onClick={handleNext}
+                className="w-full relative px-8 py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+              >
+                <span className="relative z-10">
+                  {isLastQuestion ? "Submit ✓" : "Next →"}
+                </span>
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+              </button>
+            </div>
+          ) : isSubmitting ? (
             <button 
-              onClick={handleNext}
-              className="w-full relative px-8 py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+              disabled
+              className="flex-1 px-8 py-4 bg-blue-600 text-white font-bold text-lg rounded-xl shadow-lg cursor-not-allowed flex items-center justify-center gap-3"
             >
-              <span className="relative z-10">
-                {currentIndex === questions.length - 1 ? "Submit ✓" : "Next →"}
-              </span>
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              <span>Submitting...</span>
             </button>
-          </div>
+          ) : (
+            <button 
+              disabled
+              className="flex-1 px-8 py-4 bg-gray-400 text-gray-200 font-bold text-lg rounded-xl shadow-lg cursor-not-allowed"
+            >
+              <span>
+                {isLastQuestion ? "Submit ✓" : "Next →"}
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </div>
