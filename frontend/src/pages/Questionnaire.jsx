@@ -29,18 +29,14 @@ export default function Questionnaire() {
       setCurrentIndex(currentIndex + 1);
     } else {
       console.log(JSON.stringify(answers));
-      try {
-        await fetch('/api/submit',{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(answers)
-        });
-      } catch (error) {
-        console.log('API call failed, continuing to results');
-      }
-      navigate('/results');
+
+      await fetch('http://localhost:8080/process',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(answers)
+      });
     }
   };
 
