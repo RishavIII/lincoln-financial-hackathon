@@ -8,6 +8,11 @@ export default function CompoundInterestPage() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentYear, setCurrentYear] = useState(0);
 
+  const [expenseAmount, setExpenseAmount] = useState(5);
+  const [expenseFrequency, setExpenseFrequency] = useState('daily');
+  const [expenseYears, setExpenseYears] = useState(5);
+  const [expenseRate, setExpenseRate] = useState(7);
+
   const calculateFutureValue = (year) => {
     const r = interestRate / 100;
     const n = 12;
@@ -303,7 +308,7 @@ export default function CompoundInterestPage() {
           </div>
         </div>
 
-        {/* ========== SECTION 2: INTERACTIVE TIME MACHINE ========== */}
+        {/* ========== SECTION 2: money time machine ========== */}
         <div id="simulator" className="border-t-4 border-cyan-400 pt-16 fade-in-up" style={{ animationDelay: '0.3s', opacity: 0 }}>
           <h1 className="text-6xl font-bold text-white text-center mb-4">
             <div className="text-8xl mb-4 flex justify-center">
@@ -357,7 +362,7 @@ export default function CompoundInterestPage() {
               </div>
             </div>
 
-            {/* Tree Visualization */}
+            {/* time machine visual */}
             <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-cyan-400/30 relative">
               <h2 className="text-3xl font-bold text-white mb-6">Watch It Grow!</h2>
               
@@ -380,13 +385,67 @@ export default function CompoundInterestPage() {
               </div>
 
               {!isAnimating && currentYear === years && (
-                <div className="mt-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-6 text-center shadow-2xl animate-pulse">
+                <div className="mt-8 bg-gradient-to-r from-yellow-400 to-orange-600 rounded-2xl p-6 text-center shadow-2xl">
                   <div className="text-white text-2xl font-bold mb-2">After {years} years, you'll have:</div>
                   <div className="text-white text-6xl font-black">${futureValue.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                   <div className="text-white/90 text-xl mt-2">You earned ${totalGain.toLocaleString(undefined, {maximumFractionDigits: 0})} in compound interest!</div>
                 </div>
               )}
             </div>
+          </div>
+        </div>
+
+        {/* ========== SECTION 3: expense cutting sim ========== */}
+        <div className="border-t-4 border-amber-400 pt-16 mt-16 fade-in-up" style={{ animationDelay: '0.5s', opacity: 0 }}>
+          <h1 className="text-6xl font-bold text-white text-center mb-4">Expense Cutting Calculator</h1>
+          <p className="text-2xl text-amber-300 text-center mb-12">See how much you could save by cutting one expense!</p>
+
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-amber-400/30 max-w-4xl mx-auto">
+            <div className="mb-6">
+              <label className="text-white font-semibold text-lg mb-2 block">Expense Amount: ${expenseAmount}</label>
+              <input type="range" min="1" max="50" step="1" value={expenseAmount} onChange={(e) => setExpenseAmount(Number(e.target.value))} className="w-full h-3 bg-gradient-to-r from-red-400 to-pink-600 rounded-lg" />
+            </div>
+
+            <div className="mb-6">
+              <label className="text-white font-semibold text-lg mb-2 block">Frequency</label>
+              <div className="flex gap-4">
+                <button onClick={() => setExpenseFrequency('daily')} className={`flex-1 py-3 rounded-xl font-bold transition ${expenseFrequency === 'daily' ? 'bg-amber-500 text-white' : 'bg-white/20 text-white/70'}`}>Daily</button>
+                <button onClick={() => setExpenseFrequency('weekly')} className={`flex-1 py-3 rounded-xl font-bold transition ${expenseFrequency === 'weekly' ? 'bg-amber-500 text-white' : 'bg-white/20 text-white/70'}`}>Weekly</button>
+                <button onClick={() => setExpenseFrequency('monthly')} className={`flex-1 py-3 rounded-xl font-bold transition ${expenseFrequency === 'monthly' ? 'bg-amber-500 text-white' : 'bg-white/20 text-white/70'}`}>Monthly</button>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <label className="text-white font-semibold text-lg mb-2 block">Time Period: {expenseYears} years</label>
+              <input type="range" min="1" max="40" step="1" value={expenseYears} onChange={(e) => setExpenseYears(Number(e.target.value))} className="w-full h-3 bg-gradient-to-r from-orange-400 to-red-600 rounded-lg" />
+            </div>
+
+            <div className="mb-8">
+              <label className="text-white font-semibold text-lg mb-2 block">Investment Return: {expenseRate}%</label>
+              <input type="range" min="1" max="15" step="0.5" value={expenseRate} onChange={(e) => setExpenseRate(Number(e.target.value))} className="w-full h-3 bg-gradient-to-r from-green-400 to-emerald-600 rounded-lg" />
+            </div>
+
+            {(() => {
+              const monthlyExpense = expenseFrequency === 'daily' ? expenseAmount * 30 : expenseFrequency === 'weekly' ? expenseAmount * 4.33 : expenseAmount;
+              const totalSpent = monthlyExpense * 12 * expenseYears;
+              const r = expenseRate / 100;
+              const n = 12;
+              const t = expenseYears;
+              const futureValueIfInvested = monthlyExpense * ((Math.pow(1 + r/n, n*t) - 1) / (r/n));
+
+              return (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-red-500/30 rounded-2xl p-6 border-2 border-red-400 text-center">
+                    <div className="text-red-200 text-sm mb-2">Total Cost of Expense</div>
+                    <div className="text-white text-4xl font-bold">${totalSpent.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                  </div>
+                  <div className="bg-green-500/30 rounded-2xl p-6 border-2 border-green-400 text-center">
+                    <div className="text-green-200 text-sm mb-2">If You Invested Instead</div>
+                    <div className="text-white text-4xl font-bold">${futureValueIfInvested.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         </div>
 
