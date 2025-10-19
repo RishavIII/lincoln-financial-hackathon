@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import chatGptLogo from "../assets/ChatGPT_Image_Oct_19_2025_12_25_38_AM.png";
+import chatGptLogo from "../assets/ChatGPT Image Oct 19, 2025, 07_25_55 AM.svg";
+import jsPDF from 'jspdf';
 
 // ResultCard Component
 function ResultsCard({ title, premium, best_for, tier }) {
@@ -16,7 +17,7 @@ function ResultsCard({ title, premium, best_for, tier }) {
   };
 
   return (
-    <div className="animated-border m-5 basis-full md:basis-1/3 lg:basis-1/4 transition-all duration-300 hover:scale-105">
+    <div className="animated-border m-5 basis-full md:basis-1/3 lg:basis-1/4 transition-all duration-300 hover:scale-105 min-h-[280px]">
       <div className="animated-border-content p-6 overflow-hidden group relative h-full">
         <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-blue-100/30 to-transparent"></div>
         
@@ -294,6 +295,8 @@ export default function Results() {
         border-radius: 0.9rem;
         padding: 2rem;
         height: 100%;
+        overflow: hidden;
+        position: relative;
       }
 
       .card-content-plan {
@@ -328,7 +331,7 @@ export default function Results() {
           background: linear-gradient(135deg, #3b82f6, #06b6d4, #10b981, #34d399, #6ee7b7, #3b82f6);
           background-size: 400% 400%;
           animation: gradient-border-animation 3s ease infinite;
-          padding: 2px;
+          padding: 4px;
           border-radius: 1.5rem;
         }
 
@@ -646,6 +649,69 @@ export default function Results() {
 
   const totalCost = calculateTotalCost();
 
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    const answers = JSON.parse(localStorage.getItem('questionnaireAnswers') || '{}');
+    
+    doc.setFontSize(20);
+    doc.text("Your Personalized Insurance Plan", 20, 20);
+    
+    doc.setFontSize(12);
+    let y = 40;
+    
+    doc.text(`Health Insurance: ${planDetails.health[recommendations?.health]?.name}`, 20, y);
+    doc.text(`Premium: ${planDetails.health[recommendations?.health]?.premium}/mo`, 20, y + 7);
+    doc.text(`Tier: ${recommendations?.health}`, 20, y + 14);
+    y += 30;
+    
+    doc.text(`Dental Insurance: ${planDetails.dental[recommendations?.dental]?.name}`, 20, y);
+    doc.text(`Premium: ${planDetails.dental[recommendations?.dental]?.premium}/mo`, 20, y + 7);
+    doc.text(`Tier: ${recommendations?.dental}`, 20, y + 14);
+    y += 30;
+    
+    doc.text(`Vision Insurance: ${planDetails.vision[recommendations?.vison]?.name}`, 20, y);
+    doc.text(`Premium: ${planDetails.vision[recommendations?.vison]?.premium}/mo`, 20, y + 7);
+    doc.text(`Tier: ${recommendations?.vison}`, 20, y + 14);
+    y += 30;
+    
+    doc.text(`Critical Care: ${planDetails.criticalCare[recommendations?.["critical care"]]?.name}`, 20, y);
+    doc.text(`Premium: ${planDetails.criticalCare[recommendations?.["critical care"]]?.premium}/mo`, 20, y + 7);
+    doc.text(`Tier: ${recommendations?.["critical care"]}`, 20, y + 14);
+    y += 30;
+    
+    doc.text(`Caregiver Insurance: ${planDetails.caregiver[recommendations?.caregiver]?.name}`, 20, y);
+    doc.text(`Premium: ${planDetails.caregiver[recommendations?.caregiver]?.premium}/mo`, 20, y + 7);
+    doc.text(`Tier: ${recommendations?.caregiver}`, 20, y + 14);
+    y += 30;
+    
+    doc.setFontSize(16);
+    doc.text(`Total Monthly Cost: $${totalCost}`, 20, y);
+    y += 20;
+    
+    doc.setFontSize(14);
+    doc.text("Why These Recommendations?", 20, y);
+    y += 10;
+    
+    doc.setFontSize(10);
+    let hasReasons = false;
+    
+    Object.keys(answers).forEach(key => {
+      const value = answers[key];
+      if (value && value !== '' && value !== 'none') {
+        const displayValue = Array.isArray(value) ? value.join(', ') : value;
+        doc.text(`- ${key.replace(/_/g, ' ')}: ${displayValue}`, 20, y);
+        y += 7;
+        hasReasons = true;
+      }
+    });
+    
+    if (!hasReasons) {
+      doc.text("Based on your profile and needs assessment", 20, y);
+    }
+    
+    doc.save('insurance-plan-summary.pdf');
+  };
+
   return (
     <div className="min-h-screen p-8 relative overflow-hidden">
       {/* Animated Gradient Background */}
@@ -689,16 +755,12 @@ export default function Results() {
 
         {/* Cards Grid */}
         <div className="p-12 flex flex-row flex-wrap justify-center w-full fade-in-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
-          <div className="animated-border m-5 basis-full md:basis-1/3 lg:basis-1/4 transition-all duration-300 hover:scale-105 fade-in-up" style={{ animationDelay: '0.3s', opacity: 0 }}>
-            <div className="animated-border-content p-8">
-              <div className="text-center relative z-10 flex items-center justify-center h-full">
-                <img 
-                  src={chatGptLogo} 
-                  alt="AI Assistant" 
-                  className="h-24 mx-auto" 
-                />
-              </div>
-            </div>
+          <div className="m-5 basis-full md:basis-1/3 lg:basis-1/4 transition-all duration-300 hover:scale-105 fade-in-up min-h-[280px] flex items-center justify-center" style={{ animationDelay: '0.3s', opacity: 0 }}>
+            <img 
+              src={chatGptLogo} 
+              alt="AI Assistant" 
+              className="h-64 w-auto drop-shadow-[0_0_40px_rgba(16,185,129,0.6)] hover:drop-shadow-[0_0_60px_rgba(16,185,129,0.8)] transition-all duration-300" 
+            />
           </div>
 
           <ResultsCard
@@ -759,7 +821,7 @@ export default function Results() {
 
         {/* Action Buttons */}
         <div className="mt-8 flex justify-center gap-6 flex-wrap fade-in-up" style={{ animationDelay: '0.8s' }}>
-          <button className="relative px-8 py-4 bg-white/10 backdrop-blur-md text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 hover:scale-105 hover:shadow-2xl transition-all duration-300">
+          <button onClick={downloadPDF} className="relative px-8 py-4 bg-white/10 backdrop-blur-md text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 hover:scale-105 hover:shadow-2xl transition-all duration-300">
             <span className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
