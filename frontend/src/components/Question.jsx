@@ -187,16 +187,6 @@ export default function Question({type, title, options, value, onChange}) {
                                 onChange={(e) => onChange(e.target.value)}
                                 className="w-full custom-slider"
                             />
-                            {/* Value bubble */}
-                            <div 
-                                className="absolute -top-10 bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg transition-all duration-200"
-                                style={{
-                                    left: `calc(${((value || 5) / 10) * 100}% - 20px)`
-                                }}
-                            >
-                                {value || 5}
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-600"></div>
-                            </div>
                         </div>
                         <span className="text-sm font-medium whitespace-nowrap">Strongly Agree</span>
                     </div>
