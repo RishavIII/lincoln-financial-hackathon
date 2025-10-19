@@ -103,6 +103,33 @@
 
 ---
 
+### Vision Basic
+**Monthly Premium:** $8  
+
+**Coverage:**
+- Annual comprehensive eye exam (100% covered)
+- Frames: $100 allowance every 12 months
+- Standard lenses: Covered in full every 12 months
+- Contact lenses: $100 allowance (in lieu of glasses)
+
+**Best For:** Employees who need routine vision care and budget-friendly coverage
+
+---
+
+### Vision Plus
+**Monthly Premium:** $20  
+
+**Coverage:**
+- Annual comprehensive eye exam (100% covered)
+- Frames: $200 allowance every 12 months
+- Premium lenses (anti-glare, progressive): Covered with a small copay
+- Contact lenses: $150 allowance (in lieu of glasses) plus fittings
+- 25% discount on LASIK and elective vision procedures
+
+**Best For:** Employees who want broader materials coverage, premium lenses, or frequent prescription updates
+
+---
+
 ## Flexible Spending Accounts (FSA)
 
 ### Healthcare FSA
