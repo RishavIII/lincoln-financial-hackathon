@@ -16,12 +16,12 @@ export default function Navbar() {
 
   return (
     <nav className={`sticky top-4 z-50 mx-4 rounded-2xl transition-all duration-300 ${
-      scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-gray-800 shadow-sm'
+      scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/5 shadow-sm'
     }`}>
       <div className="max-w-8xl mx-auto px-6 py-3 flex items-center justify-between">
         <h1 className="text-xl font-bold text-[#4cae4f]">InsoraPath</h1>
 
-        <div className="flex gap-6">
+        <div className="flex gap-6 ">
           <NavbarLink
             url="/"
             name="Dashboard"

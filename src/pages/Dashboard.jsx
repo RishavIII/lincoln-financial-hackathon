@@ -15,8 +15,8 @@ export default function Dashboard() {
                         </div>
             
                         <div className=" flex justify-center items-center  h-[20vh]">
-                         <button className="px-6 py-2 bg-[#4cae4f] text-white rounded-lg hover:bg-blue-700">
-                         Questioner
+                         <button className="h-20 px-6 py-2 bg-[#4cae4f]/15 text-white rounded-lg hover:bg-[#4cae4f]  border-2 border-[#4cae4f]">
+                         Find My Coveragee
                          </button>
                        </div>
           </div>
