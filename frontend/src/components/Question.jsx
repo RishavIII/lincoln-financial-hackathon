@@ -101,6 +101,7 @@ export default function Question({type, title, options, value, onChange}) {
             </div>
         )
     }
+    
     if (type === "slider") {
         return (
             <div className="p-6 bg-white rounded-xl shadow hover:shadow-md transition">
