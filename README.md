@@ -1,4 +1,4 @@
-This project was built as part of CodeLinc10.
+This project was built as part of CodeLinc10 at Lincoln Financial Group.
 
 # InsuraPath
 
