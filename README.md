@@ -1,16 +1,39 @@
-# React + Vite
+This project was built as part of CodeLinc10.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# InsuraPath
 
-Currently, two official plugins are available:
+Understanding insurance plans can be tricky, especially for those just starting out in a career. Insurapath aims to solve this issue by producing and educating about reliable insurance plan choices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What is it?
 
-## React Compiler
+Insurapath provides a questionnaire to users where they answer novel questions about themselves. Afterwards, Insurapath displays a results page which informs users of their suggested insurance plan from our LLM based on the answers to the questionnaire. Additionally, because the power of savings is not well understood by young adults, we created a wellness simulator that simulates how much savings with compound interest can accumulate.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How we built it
 
-## Expanding the ESLint configuration
+The front-end of our website is built with React and Tailwind. The back-end of our website is built with Java and Springboot.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Challenges we ran into
+
+On the back-end side, it was very difficult to get Amazon Bedrock functioning. At one point (and other teams faced this) our AWS account was completely blocked and we are unable to utilize AI.
+
+## Accomplishments that we're proud of
+
+Our front-end is awesome. Just take a look at the screenshots.
+
+
+## What we learned
+
+We learned how to use React and Tailwind as well as how to incorporate AI into our backend with Amazon Bedrock.
+
+## What's next for Insurapath
+
+Registration and stored questionnaire data, a more extensive questionnaire, more features within our wellness simulator to encourage those in their early-career to make sound financial choices.
+
+## Built with :
+
+- Java
+- SpringBoot
+- Amazon Q
+- React
+- TailwindCSS
+- VS Code
